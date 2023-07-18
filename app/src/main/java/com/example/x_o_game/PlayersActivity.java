@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class PlayersActivity extends AppCompatActivity {
 EditText firstName ,secondName;
@@ -24,10 +25,15 @@ Button play;
             public void onClick(View v) {
                 String name1X=firstName.getText().toString();
                 String name2O=secondName.getText().toString();
-                Intent intent=new Intent(getApplicationContext(),PlayingActivity.class);
-                intent.putExtra("1_name",name1X);
-                intent.putExtra("2_name",name2O);
-                startActivity(intent);
+                if(name1X.isEmpty() && name2O.isEmpty()){
+                    Toast.makeText(PlayersActivity.this, "Please enter First Name and second Name", Toast.LENGTH_SHORT).show();
+
+                }else {
+                    Intent intent = new Intent(PlayersActivity.this, PlayingActivity.class);
+                    intent.putExtra("1_name", name1X);
+                    intent.putExtra("2_name", name2O);
+                    startActivity(intent);
+                }
             }
         });
     }
