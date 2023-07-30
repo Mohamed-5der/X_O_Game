@@ -1,8 +1,10 @@
 package com.example.x_o_game;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.Tag;
 import android.os.Bundle;
@@ -17,15 +19,12 @@ import java.util.ArrayList;
 public class PlayingActivity extends AppCompatActivity {
     TextView nameX,nameO;
     ImageButton btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9;
+    String name1X,name2O;
     boolean flagX = true ;
-    boolean userX;
-    ArrayList<ImageButton> asswersX=new ArrayList<>();
-    ArrayList<ImageButton> asswersY=new ArrayList<>();
-
-
+    ArrayList<Object> xId = new ArrayList<>();
+    ArrayList<Object> oId = new ArrayList<>();
     public void onClick(View btn) {
         chooseImage((ImageButton) btn);
-        btn.getTag();
     }
 
     @Override
@@ -44,98 +43,126 @@ public class PlayingActivity extends AppCompatActivity {
         btn8=findViewById(R.id.btn8);
         btn9=findViewById(R.id.btn9);
         Intent intent=getIntent();
-        String name1X=intent.getStringExtra("1_name");
-        String name2O=intent.getStringExtra("2_name");
+        name1X=intent.getStringExtra("1_name");
+        name2O=intent.getStringExtra("2_name");
         nameX.setText(name1X);
         nameO.setText(name2O);
+
     }
 
 
     private void chooseImage( ImageButton btn){
         if (flagX){
             btn.setImageResource(R.drawable.x);
-            asswersX.add(btn);
+            xId.add(btn.getId());
             flagX = false ;
+            for (int i = 0 ; i < xId.size() ; i++){
+                if (xId.size() == 3){
+
+                    if (xId.contains(btn1.getId()) && xId.contains(btn2.getId()) && xId.contains(btn3.getId()) ){
+                        onBackPressed(name1X);
+                    }
+                    else if (xId.contains(btn1.getId()) && xId.contains(btn4.getId()) && xId.contains(btn7.getId())) {
+                        onBackPressed(name1X);
+                    }
+                    else if (xId.contains(btn2.getId()) && xId.contains(btn5.getId()) && xId.contains(btn8.getId()) ) {
+                        onBackPressed(name1X);                    }
+                    else if (xId.contains(btn4.getId()) && xId.contains(btn5.getId()) && xId.contains(btn6.getId()) ) {
+                        onBackPressed(name1X);
+                    }
+                    else if (xId.contains(btn3.getId()) && xId.contains(btn6.getId()) && xId.contains(btn9.getId()) ) {
+                        onBackPressed(name1X);
+                    }
+
+                    else if (xId.contains(btn7.getId()) && xId.contains(btn8.getId()) && xId.contains(btn9.getId()) ) {
+                        onBackPressed(name1X);
+                    }
+
+                    else if (xId.contains(btn1.getId()) && xId.contains(btn5.getId()) && xId.contains(btn9.getId()) ) {
+                        onBackPressed(name1X);
+                    }
+
+                    else if (xId.contains(btn3.getId()) && xId.contains(btn5.getId()) && xId.contains(btn7.getId())) {
+                        onBackPressed(name1X);
+                    }
+
+                    else {
+                        xId.clear();
+                    }
+
+                }
+            }
+
         }else {
             btn.setImageResource(R.drawable.o);
-            asswersY.add(btn);
+            oId.add(btn.getId());
+            for (int i = 0 ; i < oId.size() ; i++){
+                if (oId.size() == 3){
+
+                    if (oId.contains(btn1.getId()) && oId.contains(btn2.getId()) && oId.contains(btn3.getId())){
+                        onBackPressed(name2O);
+                    }
+                    else if (oId.contains(btn1.getId()) && oId.contains(btn4.getId()) && oId.contains(btn7.getId()) ) {
+                        onBackPressed(name2O);
+                    }
+                    else if (oId.contains(btn2.getId()) && oId.contains(btn5.getId()) && oId.contains(btn8.getId())) {
+                        onBackPressed(name2O);
+                    }
+                    else if (oId.contains(btn4.getId()) && oId.contains(btn5.getId()) && oId.contains(btn6.getId())) {
+                        onBackPressed(name2O);
+                    }
+                    else if (oId.contains(btn3.getId()) && oId.contains(btn6.getId()) && oId.contains(btn9.getId())) {
+                        onBackPressed(name2O);
+                    }
+
+                    else if (oId.contains(btn7.getId()) && oId.contains(btn8.getId()) && oId.contains(btn9.getId())) {
+                        onBackPressed(name2O);
+                    }
+
+                    else if (oId.contains(btn1.getId()) && oId.contains(btn5.getId()) && oId.contains(btn9.getId())) {
+                        onBackPressed(name2O);
+                    }
+
+                    else if (oId.contains(btn3.getId()) && oId.contains(btn5.getId()) && oId.contains(btn7.getId())) {
+                        onBackPressed(name2O);
+                    }
+                    else {
+                        Log.i("userO" , "lose");
+                        oId.clear();
+                    }
+
+                }
+            }
             flagX = true ;
         }
         btn.setEnabled(false);
-        userX = !flagX ;
-
-        if (userX) {
-
-            if (!btn1.isEnabled() && !btn2.isEnabled() && !btn3.isEnabled() && !userX){
-                Log.i("User" , "User X Win");
-            }
-            else  if (!btn4.isEnabled() && !btn5.isEnabled() && !btn6.isEnabled() && !userX) {
-                Log.i("User" , "User X Win");
-            }
-
-            else  if (!btn7.isEnabled() && !btn8.isEnabled() && !btn9.isEnabled() && !userX) {
-                Log.i("User" , "User X Win");
-            }
-
-            else  if (!btn1.isEnabled() && !btn4.isEnabled() && !btn7.isEnabled() && !userX) {
-                Log.i("User" , "User X Win");
-            }
-
-            else  if (!btn2.isEnabled() && !btn5.isEnabled() && !btn8.isEnabled() && !userX) {
-                Log.i("User" , "User X Win");
-            }
-
-            else  if (!btn3.isEnabled() && !btn6.isEnabled() && !btn9.isEnabled() && !userX) {
-                Log.i("User" , "User X Win");
-            }
-
-            else  if (!btn1.isEnabled() && !btn5.isEnabled() && !btn9.isEnabled() && !userX) {
-                Log.i("User" , "User X Win");
-            }
-
-            else  if (!btn3.isEnabled() && !btn5.isEnabled() && !btn7.isEnabled() && !userX) {
-                Log.i("User" , "User X Win");
-            }
-        }
-        // user O
-        else  {
-
-            if (!btn1.isEnabled() && !btn2.isEnabled() && !btn3.isEnabled() && !userX){
-                Log.i("User" , "User X Win");
-            }
-            else  if (!btn4.isEnabled() && !btn5.isEnabled() && !btn6.isEnabled() && !userX) {
-                Log.i("User" , "User X Win");
-            }
-
-            else  if (!btn7.isEnabled() && !btn8.isEnabled() && !btn9.isEnabled() && !userX) {
-                Log.i("User" , "User X Win");
-            }
-
-            else  if (!btn1.isEnabled() && !btn4.isEnabled() && !btn7.isEnabled() && !userX) {
-                Log.i("User" , "User X Win");
-            }
-
-            else  if (!btn2.isEnabled() && !btn5.isEnabled() && !btn8.isEnabled() && !userX) {
-                Log.i("User" , "User X Win");
-            }
-
-            else  if (!btn3.isEnabled() && !btn6.isEnabled() && !btn9.isEnabled() && !userX) {
-                Log.i("User" , "User X Win");
-            }
-
-            else  if (!btn1.isEnabled() && !btn5.isEnabled() && !btn9.isEnabled() && !userX) {
-                Log.i("User" , "User X Win");
-            }
-
-            else  if (!btn3.isEnabled() && !btn5.isEnabled() && !btn7.isEnabled() && !userX) {
-                Log.i("User" , "User X Win");
-            }
-
-        }
-
-
     }
 
 
 
+    public void onBackPressed(String name) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(PlayingActivity.this);
+
+        builder.setMessage(name + " Wins");
+
+        builder.setTitle("Congratiolation");
+
+
+        builder.setCancelable(false);
+
+        builder.setPositiveButton("finish", (DialogInterface.OnClickListener) (dialog, which) -> {
+            finish();
+        });
+
+        builder.setNegativeButton("Try Again", (DialogInterface.OnClickListener) (dialog, which) -> {
+               dialog.cancel();
+               this.finish();
+               Intent intent1 =new Intent(getApplicationContext(),PlayingActivity.class);
+               startActivity(intent1);
+        });
+
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
 }

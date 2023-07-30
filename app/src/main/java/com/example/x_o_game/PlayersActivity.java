@@ -25,15 +25,19 @@ Button play;
             public void onClick(View v) {
                 String name1X=firstName.getText().toString();
                 String name2O=secondName.getText().toString();
+                Intent intent = new Intent(PlayersActivity.this, PlayingActivity.class);
+                intent.putExtra("1_name", name1X);
+                intent.putExtra("2_name", name2O);
+                startActivity(intent);
                 if(name1X.isEmpty() && name2O.isEmpty()){
-                    Toast.makeText(PlayersActivity.this, "Please enter First Name and second Name", Toast.LENGTH_SHORT).show();
+                 //   Toast.makeText(PlayersActivity.this, "Please enter First Name and second Name", Toast.LENGTH_SHORT).show();
 
-                }else {
-                    Intent intent = new Intent(PlayersActivity.this, PlayingActivity.class);
-                    intent.putExtra("1_name", name1X);
-                    intent.putExtra("2_name", name2O);
-                    startActivity(intent);
                 }
+//                    Intent intent = new Intent(PlayersActivity.this, PlayingActivity.class);
+//                    intent.putExtra("1_name", name1X);
+//                    intent.putExtra("2_name", name2O);
+//                    startActivity(intent);
+//
             }
         });
     }
