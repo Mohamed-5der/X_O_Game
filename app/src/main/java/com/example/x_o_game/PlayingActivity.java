@@ -155,8 +155,7 @@ public class PlayingActivity extends AppCompatActivity {
         });
 
         builder.setNegativeButton("Try Again", (DialogInterface.OnClickListener) (dialog, which) -> {
-               dialog.cancel();
-               this.finish();
+                 this.finish();
                Intent intent1 =new Intent(getApplicationContext(),PlayingActivity.class);
                startActivity(intent1);
         });
